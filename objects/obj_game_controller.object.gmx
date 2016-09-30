@@ -35,6 +35,7 @@ game_over = false;
 end_screen = false;
 
 audio_stop_sound(snd_music_molten_alloy);
+audio_stop_sound(snd_music_thrashing_around);
 audio_play_sound(snd_music_thrashing_around, 2, true);
 </string>
           </argument>
