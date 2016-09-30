@@ -11,7 +11,13 @@
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\calculate_ship_speed.gml</script>
+  </scripts>
   <objects name="objects">
+    <object>objects\obj_asteroid</object>
+    <object>objects\obj_game_controller</object>
+    <object>objects\obj_asteroid_controller</object>
     <object>objects\obj_ship</object>
   </objects>
   <rooms name="rooms">
