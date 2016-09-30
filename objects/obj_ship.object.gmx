@@ -82,25 +82,56 @@ manuvering_lock = false;
           <argument>
             <kind>1</kind>
             <string>/// Processing player stuff
+upper_lock = false;
+lower_lock = false;
 
-if ( ( keyboard_check( ord('W') ) || keyboard_check( vk_up ) ) &amp;&amp; image_angle &lt; 45 )
+if ( y &lt;= sprite_height )
+{
+    show_debug_message("UPPER BOUNDARY REACHED, ANGLE: " + string(image_angle));
+
+    while (image_angle &gt; 0) {
+        image_angle -= turn;
+        ship_angle = image_angle;
+        calculate_ship_speed();
+    }
+    upper_lock = true;
+}
+if ( y &gt;= room_height - sprite_height )
+{
+    show_debug_message("LOWER BOUNDARY REACHED, ANGLE: " + string(image_angle));
+
+    while (image_angle &lt; 0) {
+        image_angle += turn;
+        ship_angle = image_angle;
+        calculate_ship_speed();
+    }
+    show_debug_message("Lower locked");
+    lower_lock = true;
+}
+
+if ( ( keyboard_check( ord('W') ) || keyboard_check( vk_up ) ) &amp;&amp; image_angle &lt; 45 &amp;&amp; !upper_lock)
 {
     // Rotatin' left
     image_angle += turn;
+    lower_lock = true;
 }
 
-if ( ( keyboard_check( ord('S') ) || keyboard_check( vk_down ) ) &amp;&amp; image_angle &gt; -45 )
+if ( ( keyboard_check( ord('S') ) || keyboard_check( vk_down ) ) &amp;&amp; image_angle &gt; -45 &amp;&amp; !lower_lock )
 {
     // Rotatin' right
     image_angle -= turn;
 }
 
-if ( keyboard_check( ord('W') ) || keyboard_check( vk_up ) || keyboard_check( ord('S') ) || keyboard_check( vk_down ) )
+if ( ( ( keyboard_check( ord('W') ) || keyboard_check( vk_up ) ) &amp;&amp; !upper_lock ) 
+        || ( ( keyboard_check( ord('S') ) || keyboard_check( vk_down ) ) &amp;&amp; !lower_lock ) )
 {
     // Calculate motion based on angle
     ship_angle = image_angle;
     calculate_ship_speed();
 }
+
+show_debug_message("Y: " + string(y));
+
 
 if ( place_meeting( x, y, obj_asteroid ) &amp;&amp; instance_exists(obj_ship) ) {
     // Aw dang we are dead THIS SUCKS :&lt;

@@ -111,7 +111,7 @@ waiting = false;
             <kind>1</kind>
             <string>draw_set_font(fnt_conthrax_large);
 draw_set_colour(c_white);
-draw_text_ext( room_width / 2, room_height / 2 - 100, "Ah Crap, #Asteroid Field!", 75, room_width );
+draw_text_ext( room_width / 2, room_height / 2 - 100, "Oh Crap, #Asteroid Field!", 75, room_width );
 draw_set_halign( fa_center );
 draw_set_valign( fa_middle );
 

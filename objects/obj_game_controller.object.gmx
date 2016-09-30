@@ -125,7 +125,7 @@ if ( !instance_exists(obj_ship) &amp;&amp; game_over &amp;&amp; end_screen )
     draw_text(80, 40, "Score:");
     draw_set_colour( make_colour_rgb( 40, 111, 169 ) );
     draw_set_font(fnt_grid_med);
-    draw_text( 200, 40, string(score) );
+    draw_text( 200, 40, string(round(score)) );
 }
 else if ( !instance_exists(obj_ship) &amp;&amp; end_screen )
 {
@@ -138,7 +138,7 @@ else if ( !instance_exists(obj_ship) &amp;&amp; end_screen )
     draw_text( room_width / 2, (room_height / 2) - 40, "Final score:" );
     draw_set_colour( make_colour_rgb( 40, 111, 169 ) );
     draw_set_font(fnt_grid_med);
-    draw_text( room_width / 2, (room_height / 2), string(score) );
+    draw_text( room_width / 2, (room_height / 2), string(round(score)) );
 }
 </string>
           </argument>
