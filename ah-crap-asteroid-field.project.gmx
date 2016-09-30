@@ -4,23 +4,51 @@
     <Config>Configs\Default</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_music_molten_alloy</sound>
+    <sound>sound\snd_effect_engine</sound>
+    <sound>sound\snd_effect_explosion</sound>
+    <sound>sound\snd_effect_pass</sound>
+    <sound>sound\snd_music_thrashing_around</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_asteroid</sprite>
+    <sprites name="buttons">
+      <sprite>sprites\spr_btn</sprite>
+    </sprites>
     <sprite>sprites\spr_ship</sprite>
+    <sprite>sprites\spr_star</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\calculate_ship_speed.gml</script>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_grid_med</font>
+    <font>fonts\fnt_conthrax_large</font>
+    <font>fonts\fnt_conthrax</font>
+    <font>fonts\fnt_grid_large</font>
+    <font>fonts\fnt_grid_small</font>
+    <font>fonts\fnt_grid_tiny</font>
+  </fonts>
   <objects name="objects">
+    <object>objects\obj_star</object>
     <object>objects\obj_asteroid</object>
+    <object>objects\obj_menu_controller</object>
+    <object>objects\obj_star_controller</object>
     <object>objects\obj_game_controller</object>
     <object>objects\obj_asteroid_controller</object>
+    <objects name="buttons">
+      <object>objects\obj_button_restart</object>
+      <object>objects\obj_button_quit</object>
+      <object>objects\obj_button_start</object>
+      <object>objects\obj_button</object>
+    </objects>
     <object>objects\obj_ship</object>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_menu</room>
     <room>rooms\rm_game</room>
   </rooms>
   <help>

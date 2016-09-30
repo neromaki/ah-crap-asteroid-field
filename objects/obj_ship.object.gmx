@@ -31,22 +31,9 @@
 */
 
 event_inherited();
-
-thrust = 0.15;              // The normal thrust rate
-maneuver_thrust = 0.025;    // The reverse thrusters.. thrust
-boost_thrust = 0.3;         // The booster's thrust rate
-turn = 5;                   // The rate of turn (higher = faster)
-
-max_speed = 5;                         // Overall max speed
-max_thrust_speed = 5;                  // Max speed of regular thrusters
-max_maneuvering_thrust_speed = 10;    // Max speed of reverse thrusters
-max_booster_speed = 10;                // Max speed of boosters
-
-boosters_enabled = false;               // Flag for whether the boosters are being fired
-maneuvering_thrusters_enabled = false;  // Flag for whether reverse thrusters are being fired
-    maneuvering_lock = false;
-    
-action = 'Nothing';
+turn = 12;                   // The rate of turn (higher = faster)    
+move_rate = 35; 
+audio_play_sound(snd_effect_engine, 2, true);
 </string>
           </argument>
         </arguments>
@@ -95,62 +82,33 @@ manuvering_lock = false;
           <argument>
             <kind>1</kind>
             <string>/// Processing player stuff
-action = "Nothing";
 
-if ( ( keyboard_check( ord('W') ) || keyboard_check( vk_up ) ) &amp;&amp; image_angle &lt; 90 )
+if ( ( keyboard_check( ord('W') ) || keyboard_check( vk_up ) ) &amp;&amp; image_angle &lt; 45 )
 {
     // Rotatin' left
-    action = "Turning left";
-    show_debug_message("Turning left");
     image_angle += turn;
 }
 
-if ( ( keyboard_check( ord('S') ) || keyboard_check( vk_down ) ) &amp;&amp; image_angle &gt; -90 )
+if ( ( keyboard_check( ord('S') ) || keyboard_check( vk_down ) ) &amp;&amp; image_angle &gt; -45 )
 {
     // Rotatin' right
-    action = "Turning right";
-    show_debug_message("Turning right");
     image_angle -= turn;
 }
 
 if ( keyboard_check( ord('W') ) || keyboard_check( vk_up ) || keyboard_check( ord('S') ) || keyboard_check( vk_down ) )
 {
-    // Calculate motion based on angle from 90 degrees
+    // Calculate motion based on angle
     ship_angle = image_angle;
     calculate_ship_speed();
 }
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>// Some nice visual output on what we're doing
-draw_set_colour(c_white);
-draw_text(10,10, "speed:     " + string(speed) + 
-                "#direction: " + string(direction) +
-                "#facing:    " + string(image_angle));
-                
-var spr_x = lengthdir_x(-50, image_angle);
-var spr_y = lengthdir_y(-50, image_angle);
-draw_text(175, 10, "action");
-draw_text(175, 30, action);
+
+if ( place_meeting( x, y, obj_asteroid ) &amp;&amp; instance_exists(obj_ship) ) {
+    // Aw dang we are dead THIS SUCKS :&lt;
+    effect_create_above(ef_explosion, global.player.x, global.player.y, 2, c_yellow);
+    audio_play_sound(snd_effect_explosion, 2, false);
+    instance_destroy();
+}
+
 </string>
           </argument>
         </arguments>

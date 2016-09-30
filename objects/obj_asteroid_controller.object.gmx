@@ -26,6 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>waiting = false;
+frequency = 0.75;
 </string>
           </argument>
         </arguments>
@@ -74,8 +75,22 @@ waiting = false;
             <kind>1</kind>
             <string>if(!waiting)
 {
-    alarm[0] = room_speed * 1;
+    upper = clamp( random_range( frequency, frequency - 0.5), 0.05, 2 );
+    lower = clamp( random_range( frequency, frequency - 0.8 ), 0.05, 2);
+    final = room_speed * random_range( upper, lower );
+    alarm[0] = final;
     waiting = true;
+}
+
+
+if(score &gt; 1000) {
+    frequency = 0.6;
+}
+else if(score &gt; 1250) {
+    frequency = 0.5;
+}
+else if(score &gt; 1500) {
+    frequency = 0.4;
 }
 </string>
           </argument>
